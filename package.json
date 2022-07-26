@@ -42,7 +42,6 @@
     "fortmatic": "^2.2.1",
     "graphiql": "^1.4.7",
     "graphql": "^15.3.0",
-    "ipfs-http-client": "^55.0.0",
     "isomorphic-fetch": "^3.0.0",
     "node-watch": "^0.7.1",
     "postcss": "^8.2.6",
@@ -88,16 +87,12 @@
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "prestart": "node ./scripts/create_contracts.js",
     "start": "react-scripts start",
     "test": "react-scripts test",
     "lint": "eslint --config ./.eslintrc.js --ignore-path ./.eslintignore ./src/**/*",
-    "ipfs": "node ./scripts/ipfs.js",
     "surge": "cp build/index.html build/200.html && surge ./build",
-    "s3": "node ./scripts/s3.js",
     "ship": "yarn surge",
     "theme": "npx gulp less",
-    "watch": "node ./scripts/watch.js",
     "prettier": "npx prettier --write . '!(node_module|build)/**/*'"
   }
 }
