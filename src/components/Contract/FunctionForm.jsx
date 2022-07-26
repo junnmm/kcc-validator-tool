@@ -129,7 +129,7 @@ export default function FunctionForm({ contractFunction, functionInfo, provider,
                     style={{ cursor: "pointer" }}
                     onClick={async () => {
                       const floatValue = parseFloat(txValue);
-                      if (floatValue) setTxValue("" + floatValue * 10 ** 18);
+                      if (floatValue) setTxValue(utils.parseEther(String(floatValue)));
                     }}
                   >
                     ✳️
