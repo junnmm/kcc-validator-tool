@@ -216,7 +216,7 @@ export const NETWORKS = {
     name: "kcc-main",
     color: "#FF0000",
     chainId: 321,
-    blockExplorer: "https://scan.kcc.network/",
+    blockExplorer: "https://scan.kcc.io/",
     rpcUrl: "https://rpc-mainnet.kcc.network"
   }
 };
