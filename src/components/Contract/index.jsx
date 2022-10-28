@@ -73,6 +73,7 @@ export default function Contract({
   const contractIsDeployed = useContractExistsAtAddress(provider, address);
 
   const displayedContractFunctions = useMemo(() => {
+
     const results = contract
       ? Object.entries(contract.interface.functions).filter(
         fn => fn[1]["type"] === "function" && !(show && show.indexOf(fn[1]["name"]) < 0),
@@ -136,7 +137,6 @@ export default function Contract({
             {name}
             <div style={{ float: "right" }}>
               <Address value={address} blockExplorer={blockExplorer} />
-              <Balance address={address} provider={provider} price={price} />
             </div>
           </div>
         }
@@ -149,3 +149,4 @@ export default function Contract({
     </div>
   );
 }
+
