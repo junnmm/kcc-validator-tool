@@ -1,4 +1,4 @@
-import { Button, Col, Menu, Row } from "antd";
+import { Button, Card, Col, Menu, Row } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -31,6 +31,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import CompoundViewFunctionForm from "./components/Contract/CompoundForm";
 
 const { ethers } = require("ethers");
 /*
@@ -238,6 +239,28 @@ function App(props) {
             customContract={kccContracts && kccContracts.Validators}
             show = {["claimSelfBallotsReward"]}
           />
+           <div style={{ margin: "auto", width: "70vw" }}>
+            <CompoundViewFunctionForm
+              contract={kccContracts && kccContracts.Validators}
+              name="Rewards Amount"
+              provider={localProvider}
+              inputs={
+                [
+                  {
+                    type: "address",
+                    name: "miner_address"
+                  }
+                ]
+              }
+              calls={["getPoolSelfBallots","getPoolaccRewardPerShare","getPoolSelfBallotsRewardsDebt"]}
+              transform={
+                // pendingRewards = margin * accPerShare / 1e12  - rewardsDebt
+                calls => calls[0][0].mul(calls[1][0]).div(1e12).sub(calls[2][0])
+              }
+            />
+          </div>
+          
+
         </Route>
         <Route exact path="/fee">
           <Contract
@@ -248,7 +271,7 @@ function App(props) {
             address={address}
             blockExplorer={blockExplorer}
             customContract={kccContracts && kccContracts.Validators}
-            show = {["getPoolfeeShares","setFeeSharesOfValidator","claimFeeReward"]}
+            show = {["getPoolpendingFee","getPoolfeeShares","setFeeSharesOfValidator","claimFeeReward"]}
           />
         </Route>
       </Switch>
